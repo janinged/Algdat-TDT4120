@@ -96,9 +96,9 @@ def insertion_sort(A):
 
 **Kjøretid**: 
 
-* Best-case:
-* Worst-case:
-* Average-case:
+* Best-case: Θ(n)
+* Worst-case: Θ(*n<sup>2</sup>*)
+* Average-case: Θ(*n<sup>2</sup>*)
 
  
  
@@ -260,8 +260,17 @@ Bruker hash-funksjoner og nøkler slik at et element *e* med nøkkel *k* blir la
 * Idéen med hash-tabeller er å lage *h* slik at den virker ”random” for å forhindre kollisjon eller i det minste minske antallet
 * Ved hash-tabell med lenket liste har vi metodene:
 	* Chained-Hash-Insert (T, x)
-	<p>`1	insert x at the head of list T[h(x.key)`</p>	* Chained-Hash-Search (T, k) 	<p>`1	      search for an element with key k in list T[h(k)]`</p>	* Chained-Hash-Delete (T, x)	<p>`1	delete x from list T[h(x.key)]`</p>* WC for insertion er O(1)
-* WC for søk er O(n), ønsker å ha O(1), så kan være dårlig hashemetode som forårsaker dårlig søketid.* Vi kan slette et element med O(1) dersom hash-tabellen bruker *doble* lenkede lister.
+	<p>`1	insert x at the head of list T[h(x.key)`</p>
+
+	* Chained-Hash-Search (T, k) 
+	<p>`1	      search for an element with key k in list T[h(k)]`</p>
+
+	* Chained-Hash-Delete (T, x)
+	<p>`1	delete x from list T[h(x.key)]`</p>
+
+* WC for insertion er O(1)
+* WC for søk er O(n), ønsker å ha O(1), så kan være dårlig hashemetode som forårsaker dårlig søketid.
+* Vi kan slette et element med O(1) dersom hash-tabellen bruker *doble* lenkede lister.
 
 * *Hva karakteriserer en god hashefunksjon:* Den unngår kollisjoner, og like sannsynlig for hver mulige nøkkel å bli plassert et sted.
 
@@ -275,7 +284,10 @@ Bruker hash-funksjoner og nøkler slik at et element *e* med nøkkel *k* blir la
 * **Hersk** subproblemene ved å løse dem rekursivt. Hvis et subproblems størrelse er lite nok, løs subproblemene på en rett frem måte.
 * **Kombiner** løsningene på subproblemene inn i løsningen på problemet i utgangspunktet
 
-Vi deler opp problemet helt til vi kommer til minste mulige instans av problemet, så sier vi at rekursjonen har ”bottoms out” og vi har kommet til base case og får resultatet når vi kombinerer løsningene.* *Mangler `MAXIMUM-SUBARRAY (kap. 4.1)`*
+Vi deler opp problemet helt til vi kommer til minste mulige instans av problemet, så sier vi at rekursjonen har ”bottoms out” og vi har kommet til base case og får resultatet når vi kombinerer løsningene.
+
+* *Mangler `MAXIMUM-SUBARRAY (kap. 4.1)`*
+
 ### Binærsøk:
 **Input**: En liste A, pivot-element *p*, slutt-element *r* og elementet *v* som vi søker etter
 
@@ -336,7 +348,9 @@ Algortimen foregår slik:
 3. **Kombiner:** Merge-prosedyren bruker Θ(n) tid på en n-element liste, så derfor blir `C(n) = Θ(n)`
 
 
-<img src="https://i.imgur.com/6WTzfcy.png" alt="Drawing" style=" width: 400px;"/>Når vi adderer funksjonene D(n) og C(n) for merge-sort analysen, vil summen av (n) og  (1), bli (n). Når vi summerer det igjen sammen med 2T(n/2)-delen fra ”hersk”-seget gir rekurrensen for verste kjøretiden T(n) for merge-sort:
+<img src="https://i.imgur.com/6WTzfcy.png" alt="Drawing" style=" width: 400px;"/>
+
+Når vi adderer funksjonene D(n) og C(n) for merge-sort analysen, vil summen av (n) og  (1), bli (n). Når vi summerer det igjen sammen med 2T(n/2)-delen fra ”hersk”-seget gir rekurrensen for verste kjøretiden T(n) for merge-sort:
 
 `T(n) = 2T(n/2) + Θ(n)     if  n > 1, else O(1)`
 
@@ -382,8 +396,10 @@ def merge(lh,rh):
 **Quicksort**, som *Merge-sort*, benytter seg av splitt-og-herk paradigmet. Her er de tre splitt og hersk-stegene for å sortere en subliste `A[p..r]`:
 
 * **Splitt:** Del opp (omarranger) listen `A[p..r]` til to (mulig tomme) sublister `A[p..q-1]` og `A[q+1..r]`, slik at hvert element i `A[p..q-1]` er mindre eller lik A[q], som igjen er mindre eller lik hvert element i `A[q+1..r]`. Regn ut indeksen q som en del av oppdelings-prosedyren.
-* **Hersk:** Sorter de to listene `A[p..q-1]` og `A[q+1..r]` med rekursive kall til quicksort.
-* **Kombiner:** Fordi sublistene allerede er sortert, trengs det ikke å gjøres noe for å kombinere dem: hele listen `A[p..r] er nå sortert. <a name="Partition"></a> 
+
+* **Hersk:** Sorter de to listene `A[p..q-1]` og `A[q+1..r]` med rekursive kall til quicksort.
+
+* **Kombiner:** Fordi sublistene allerede er sortert, trengs det ikke å gjøres noe for å kombinere dem: hele listen `A[p..r] er nå sortert. <a name="Partition"></a> 
 
 
 ```python
@@ -416,17 +432,37 @@ def Partition(A, p, r):
 
 1.	`If p ≤ k ≤ i, then A[k] ≤ x`
 2. `If	i + 1 ≤ k ≤ j – 1, then A[k] > x`
-3. `If  k ==  r, then A[k] = x`> På begynnelsen av hver iterasjon av **for**-løkken på linje 6-9, for enhver liste indeks *k*
+3. `If  k ==  r, then A[k] = x`
+
+> På begynnelsen av hver iterasjon av **for**-løkken på linje 6-9, for enhver liste indeks *k*
 
 * *Quicksort* er **ikke stabil**, da den ikke beholder den relative rekkefølgen til like elementer under sorteringen av listen.
 
 **Under Partition:**
 
-Listeelementet `A[r]` blir pivot-elementet *x*. Lysegrå elementer er alle i den første partisjonen med verdiermindre enn *x*. De mørkegrå elementene er i den andrepartisjonen og er alle større enn *x*. De ufargede elementene er enda ikke plassert i en partisjon.
+Listeelementet `A[r]` blir pivot-elementet *x*. 
+Lysegrå elementer er alle i den første partisjonen med verdier
+mindre enn *x*. De mørkegrå elementene er i den andre
+partisjonen og er alle større enn *x*. De ufargede elementene er 
+enda ikke plassert i en partisjon.
 
 **Bevis av løkke-invariant:**
 
-1. **Initialisering:** Før den første iterasjonen av løkken, `i = p – 1` og           `j = p`. Fordi det ikke ligger noen verdier mellom *p* og *i*           og ingen verdier mellom `i + 1` og `j – 1`, de to første           betingelsene på løkke-invarianten er tilfredsstilt.2. **Vedlikehold:** Vi ser på to tilfeller, avhengig på resultatet av testen           på linje *7*. Enten så er `A[ j ] > x` eller `A[ j ] ≤ x`, løkkeinvarianten            er fortsatt tilfredsstilt.3. **Terminering:** Ved terminering, `j == r`. Da er hvert eneste element i            listen i en av de tre betingelsene i løkke-invarianten Og vi har            partisjonert elementene til 3 sett; `A[..] ≤ x`, ` A[..] > x ` og ` A[r] = x`> De to siste linjene i Partition avslutter prosedyren ved å bytte pivot elementet A[r] med A[i+1]
+1. **Initialisering:** Før den første iterasjonen av løkken, `i = p – 1` og
+           `j = p`. Fordi det ikke ligger noen verdier mellom *p* og *i*
+           og ingen verdier mellom `i + 1` og `j – 1`, de to første
+           betingelsene på løkke-invarianten er tilfredsstilt.
+
+2. **Vedlikehold:** Vi ser på to tilfeller, avhengig på resultatet av testen
+           på linje *7*. Enten så er `A[ j ] > x` eller `A[ j ] ≤ x`, løkkeinvarianten 
+           er fortsatt tilfredsstilt.
+
+3. **Terminering:** Ved terminering, `j == r`. Da er hvert eneste element i 
+           listen i en av de tre betingelsene i løkke-invarianten Og vi har 
+           partisjonert elementene til 3 sett; `A[..] ≤ x`, ` A[..] > x ` og ` A[r] = x`
+
+
+> De to siste linjene i Partition avslutter prosedyren ved å bytte pivot elementet A[r] med A[i+1]
 
 
 **Kjøretid:**
@@ -476,7 +512,8 @@ def Partition(A,p,r):
 ## Forelesning 4 - Rangering i lineær tid 
 
 ### Sammenligningsbasert sortering:
-*Disse algoritmene benytter seg kun av sammenlikning av input-elementene. Slike sorteringsalgoritmer har en øvre grense på Ω(n lg n).*
+*Disse algoritmene benytter seg kun av sammenlikning av input-elementene.
+ Slike sorteringsalgoritmer har en øvre grense på Ω(n lg n).*
  
  **Teorem**: Enhver sammenligningsbasert sorteringsalgoritme krever (n lg n) sammenlikninger i worst case.
  
@@ -490,7 +527,8 @@ Algoritmen er **stabil**, som betyr at den beholder elementenes relative ordning
 
 **Input:** En n-element usortert liste *A*
 
-**Output:** En sortert liste bestående av n-elementer fra *A*
+**Output:** En sortert liste bestående av n-elementer fra *A*
+
  ```python
  def counting_sort(A,k):
     res = [0]*len(A)
@@ -575,14 +613,18 @@ def counting_sort(A,k,d):
     return res
 ```
 
-Gitt *n* *d*-siffrede tall kan hvert siffer være en av *k* mulige verdier, vil Radix sort sortere disse tallene i `Θ(d (n + k))` tid, hvis den stabile sorteringsalgoritmen bruker `Θ(n + k)` tid. *Viktig* at sorteringsalgoritmen vi velger er **stabil** fordi at elementene med likt tall på siffer *d* ikke mister sin relative rekkefølge og ødelegger for sorteringen på de tidligere sorteringskallene.
+Gitt *n* *d*-siffrede tall kan hvert siffer være en av *k* mulige verdier, vil Radix sort sortere disse tallene i `Θ(d (n + k))` tid, hvis den stabile sorteringsalgoritmen bruker `Θ(n + k)` tid. 
 
-
+*Viktig* at sorteringsalgoritmen vi velger er **stabil** fordi at elementene med likt tall på siffer *d* ikke mister sin relative rekkefølge og ødelegger for sorteringen på de tidligere sorteringskallene.
+
+
+
 
 ### Bucket sort
 Bucket sort antar at instansen er tatt fra en uniform fordeling og har en average-case kjøretid på `O(n)`, og worst-case `O(n^2)`. 
 
-Som *Counting sort* er Bucket sort rask fordi den gjør antagelser på instansen. Bucket sort deler opp intervallet `[0, 1)` inn i n like store intervaller, eller **buckets**.
+Som *Counting sort* er Bucket sort rask fordi den gjør antagelser på instansen. 
+Bucket sort deler opp intervallet `[0, 1)` inn i n like store intervaller, eller **buckets**.
 
 ```python
 def bucket_sort(A):
@@ -699,7 +741,10 @@ SELECT(A,i)
 ```
 
 * *Select* kodet i Python ligger [**her**](https://github.com/henrhoi/Algdat-TDT4120/blob/master/Algoritmer%20i%20pensum/Line%C3%A6r%20rangering/Select.py)
-
+
+
+
+
 <a name="of5"></a>
 ## Forelesning 5 - Rotfaste trestrukturer 
 
@@ -728,7 +773,7 @@ I begge typene tilfredsstiller verdiene i nodene en heap-egenskap, som avhenger 
 	*  For hver node *i* &ne; 0 er `A[parent(i)] ≥ A[i]`
 	*  En nodes verdi er på det meste sin forgjengers verdi - dvs største element ligger i roten.
 * **Min-heaps egenskapen**:
-	* For hver node *i* &ne; 0 er `A[parent(i)] ≥ A[i]` 
+	* For hver node *i* &ne; 0 er `A[parent(i)] <= A[i]` 
 	* En nodes verdi er på det minste sin forgjengers verdi - dvs. minste element ligger i roten.
 
 Dersom vi ser på en heap som et tree, definerer vi *høyden* til en node i treet til å den lengste enkle veien fra noden til en løvnode, og vi definer *høyden* til treet til å være høyden til roten.
@@ -749,10 +794,10 @@ For å kunne vedlikeholde *max-heap egenskapen*, kaller vi på prosedyren *Max-H
 MAX-HEAPIFY(A, i)
 1	l = left(i)
 2	r = right(i)
-3	if l ≤ A.heap-size and A[l] >A[i]
+3	if l ≤ A.heapsize and A[l] > A[i]
 4		largest = l
 5	else largest = i
-6	if r ≤ A.heap-size and A[r] > A[largest]
+6	if r ≤ A.heapsize and A[r] > A[largest]
 7		largest = r
 8	if largest ≠ i
 9		exchange A[i] with A[largest]
@@ -785,7 +830,7 @@ Prosedyren *Build-Max-Heap* går igjennom de **resterende** nodene av treet og k
 
 ```sudocode
 BUILD-MAX-HEAP(A)
-1	A.heap-size = A.length
+1	A.heapsize = A.length
 2	for i = ⌊A.heapsize/2⌋ downto 1
 3		MAX-HEAPIFY(A, i)
 ```
@@ -809,7 +854,7 @@ Vi kan regne ut en øvre grense for kjøretiden til *Build-Max-Heap* som følgen
 
 
 ### Heapsort
-Heapsort-algoritmen starter med å bygge en max-heap av input `A[1..n]`. Siden det største elementet nå ligger som roten *A[1]*, kan v putte den i sin endelige posisjon ved å bytte den med *A[n]*. Hvis vi nå ser bort fra node *n* i heapen, så kan vi enkelt deinkrementere A.heap-size.
+Heapsort-algoritmen starter med å bygge en max-heap av input `A[1..n]`. Siden det største elementet nå ligger som roten *A[1]*, kan v putte den i sin endelige posisjon ved å bytte den med *A[n]*. Hvis vi nå ser bort fra node *n* i heapen, så kan vi enkelt deinkrementere A.heapsize.
 
 
 ```sudocode
@@ -854,7 +899,7 @@ HEAP-MAXIMUM(A)
 
 ```sudocode
 HEAP-EXTRACT-MAX(A)
-1	if A.heap-size < 1
+1	if A.heapsize < 1
 2		error "heap underflow"
 3	max = A[0]
 4	A[0] = A[A.heapsize]
@@ -881,9 +926,9 @@ HEAP-INCREASE-KEY(A,i,key)
 
 ```sudocode
 MAX-HEAP-INSERT(A, key)
-1	A.heap-size += 1
-2	A[A.heap-size] = -∞
-3	HEAP-INCREASE-KEY(A, A.heap-size, key)
+1	A.heapsize += 1
+2	A[A.heapsize] = -∞
+3	HEAP-INCREASE-KEY(A, A.heapsize, key)
 ```
 
 * *Kjøretid:* **`O(lg n)`** siden den kun gjør O(1) arbeid over *Heap-Increase-Key*.
